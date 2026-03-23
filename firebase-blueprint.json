@@ -1,0 +1,58 @@
+{
+  "entities": {
+    "Appointment": {
+      "title": "Appointment",
+      "description": "Patient appointment requests",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Patient name" },
+        "email": { "type": "string", "format": "email", "description": "Patient email" },
+        "phone": { "type": "string", "description": "Patient phone" },
+        "date": { "type": "string", "format": "date-time", "description": "Appointment date" },
+        "service": { "type": "string", "description": "Requested service ID" },
+        "message": { "type": "string", "description": "Additional notes" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"], "description": "Current status" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
+      },
+      "required": ["name", "email", "phone", "date", "service", "status", "createdAt"]
+    },
+    "ClinicInfo": {
+      "title": "Clinic Info",
+      "description": "General clinic information",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "doctor": { "type": "string" },
+        "specialty": { "type": "string" },
+        "address": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "hours": { "type": "string" }
+      }
+    },
+    "User": {
+      "title": "User",
+      "description": "Application users with roles",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "staff"] },
+        "displayName": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "appointments": {
+      "schema": "Appointment",
+      "description": "Collection of appointment requests"
+    },
+    "clinic_info": {
+      "schema": "ClinicInfo",
+      "description": "Singleton document for clinic details"
+    },
+    "users": {
+      "schema": "User",
+      "description": "User profiles and roles"
+    }
+  }
+}
